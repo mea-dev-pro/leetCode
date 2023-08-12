@@ -1,10 +1,18 @@
+import { authModalState } from '@/atoms/authModalAtom';
 import React from 'react';
+import { useSetRecoilState } from 'recoil';
 
 type LoginProps = {
 
 };
 
 const Login: React.FC<LoginProps> = () => {
+
+    const setAuthModalState = useSetRecoilState(authModalState);
+
+    const handleClick = (type: 'login' | 'register' | 'forgotPassword') => {
+        setAuthModalState((prev) => ({ ...prev, type: type }))
+    }
 
     return <form className='space-y-6 px-6 pb-4'>
         <h3 className='test-xl font-medium text-white'>Sign in to LeetClone</h3>
@@ -15,7 +23,7 @@ const Login: React.FC<LoginProps> = () => {
             bg-gray-600 border-gray-500 placeholder-gray-400 text-white'
                 placeholder='name@gmail.com'
             />
-        </div> 
+        </div>
         <div>
             <label htmlFor="password" className='text-sm font-medium block mb-2 text-gray-300'> Your Password</label>
             <input type="password" name="password" id="password" className='
@@ -24,16 +32,16 @@ const Login: React.FC<LoginProps> = () => {
                 placeholder='*********'
             />
         </div>
-        <button 
+        <button
             type='submit'
             className='w-full text-white focus:ring-blue-300 font-medium rounded-lg
-            text-sm px-5 py-2.5 text-center bg-brand-orange hover:bg-brand-orange-s' 
+            text-sm px-5 py-2.5 text-center bg-brand-orange hover:bg-brand-orange-s'
         >
             Login
         </button>
-        <button 
-            type='submit'
-            className='flex w-full justify-end' 
+        <button
+            className='flex w-full justify-end'
+            onClick={() => handleClick("forgotPassword")}
         >
             <a href="#" className='text-sm block text-brand-orange hover:underline w-full text-right'>
                 Forget Password
@@ -41,7 +49,7 @@ const Login: React.FC<LoginProps> = () => {
         </button>
         <div className='text-sm font-medium text-gray-300'>
             Not Register?{" "}
-            <a href="#" className='text-blue-700 hover:underline'>Create account</a>
+            <a href="#" className='text-blue-700 hover:underline' onClick={() => handleClick("register")}>Create account</a>
         </div>
     </form>
 }
