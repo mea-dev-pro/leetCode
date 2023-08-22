@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useSetRecoilState } from 'recoil';
+import { toast } from "react-toastify";
+
 
 type LoginProps = {
 
@@ -43,7 +45,16 @@ const Login: React.FC<LoginProps> = () => {
     }
     
     useEffect(() => {
-      if(error) alert(error);
+      if(error)   toast.warn(error.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+    })
     }, [error])
     
     return <form className='space-y-6 px-6 pb-4' onSubmit={handleLogin}>

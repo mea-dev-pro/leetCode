@@ -4,7 +4,8 @@ import { useSetRecoilState } from 'recoil';
 import { auth, firestore } from '@/firebase/firebase';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useRouter } from 'next/router';
-import { doc, setDoc } from 'firebase/firestore';
+import { toast } from "react-toastify";
+
 
 type SignupProps = {
 
@@ -53,7 +54,18 @@ const Signup: React.FC<SignupProps> = () => {
             router.push('/');
 
         } catch (error: any) {
-            alert(error.message)
+            if (error) {
+                toast.warn(error.message, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                })
+            }
         }
     }
 
