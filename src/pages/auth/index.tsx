@@ -29,9 +29,8 @@ const AuthPage: React.FC<AuthPageProps> = () => {
             <div className='max-w-7xl mx-auto'>
                 <NavBar />
                 <div className='flex items-center justify-center h-[calc(100vh-5rem)] pointer-events-none select-none'>
-                    <img src="/hero.png" alt="hero img" />
+                    <img src="/hero.png" alt="hero img"  width={700} height={700}/>
                 </div>
-                {/* <AuthModal /> */}
                 {
                     authModal.isOpen && <AuthModal />
                 }
