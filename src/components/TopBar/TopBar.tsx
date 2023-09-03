@@ -7,6 +7,7 @@ import { authModalState } from '@/atoms/authModalAtom';
 import { useSetRecoilState } from 'recoil';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { BsList } from 'react-icons/bs';
+import Timer from '../Timer/Timer';
 
 type TopBarProps = {
     problemPage: boolean;
@@ -19,7 +20,7 @@ const TopBar: React.FC<TopBarProps> = ({ problemPage }) => {
 
 
     return <nav className='relative flex h-[50px] w-full shrink-0 items-center px-5 bg-dark-layer-1 text-dark-gray-7'>
-        <div className={`flex w-full items-center justify-between max-w-[1200px] mx-auto`}>
+        <div className={`flex w-full items-center justify-between ${!problemPage ? "max-w-[1200px] mx-auto" : ""} `}>
             <Link href='/' className='h-[22px] flex-1'>
                 <img src='/logo-full.png' alt='Logo' className='h-full' />
             </Link>
@@ -64,6 +65,7 @@ const TopBar: React.FC<TopBarProps> = ({ problemPage }) => {
                         <button className='bg-dark-fill-3 py-1 px-2 cursor-pointer rounded ' onClick={() => setAuthModalState((prev) => ({ ...prev, type: "login", isOpen: true }))}>Sign In</button>
                     </Link>
                 )}
+                {problemPage && <Timer />}
                 {user && (
                     <>
                         <div className='cursor-pointer group relative'>
